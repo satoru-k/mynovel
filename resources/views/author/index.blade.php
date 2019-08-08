@@ -51,7 +51,7 @@
     <div class="row">
       <div class="list-news col-md-12 mx-auto">
         <div class="row" style="border:1px solid #999999;">
-          <table class="table" style="table-layout:fixed;">
+          <table class="table" style="table-layout:fixed; margin-bottom:0;">
             <thead class="thead-light">
               <tr>
                 <th style="width:10%; font-weight: 200;">ユーザーID</th>
