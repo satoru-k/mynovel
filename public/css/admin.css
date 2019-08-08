@@ -1,0 +1,95 @@
+body {
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.nav-item-r {
+  color: #fff;
+}
+
+.welcome {
+  color: #4e4e4e;
+}
+
+.top-logo {
+  color: #25789a;
+}
+
+.top-count {
+  color: #d625ce;
+  font-weight: bold;
+}
+
+.top-free {
+  color: #d84a1b;
+}
+
+.top-user {
+  color: #926a1b;
+}
+
+.top-book {
+  color: #dc2286;
+}
+
+.title,
+.introduction,
+.s-text {
+  word-break: break-all;
+}
+
+.str-counter {
+  color: #666;
+}
+
+.validation {
+  font-size: 0.8rem;
+}
+
+.validation .validation-message {
+  color: #FA5C65;
+}
+
+.marking {
+  color: darkgray;
+}
+
+.table-hover tbody tr:hover > td {
+  background-color: lightcyan;
+}
+
+.fin {
+  color: #e23131;
+}
+
+.ruby-system {
+  font-size: 12px;
+  color: #666666;
+}
+
+.ruby-system-link {
+  font-size: 12px;
+}
+
+.ruby-symbol {
+  color: #e23131;
+}
+
+.scroll-button {
+  position: fixed;
+  z-index: 3;
+  display: block;
+  right: 100px;
+  padding: 5px;
+  border-radius: 5px;
+  text-decoration: none;
+  background-color: #d0e5ef;
+  color: #8a8a8a;
+}
+
+.scroll-button:hover {
+  text-decoration: none;
+  background-color: #b4b5dc;
+  color: #f3f3f3;
+}
+
