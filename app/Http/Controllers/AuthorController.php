@@ -9,7 +9,7 @@ use App\User;
 
 class AuthorController extends Controller
 {
-    //作者index
+    //ユーザーindex
     public function index(Request $request)
     {
       $cond_name = $request->cond_name;
@@ -18,8 +18,11 @@ class AuthorController extends Controller
       $query = User::query();
 
       if ($cond_name != '') {
+          //ユーザー名で検索
           $query->where('name', 'LIKE', '%'.$cond_name.'%');
       }
+
+      //投稿作品の有無で表示・非表示
       if ($cond_work == '1') {
           $query->whereExists(function($q) {
             $q->from('novels')->whereRaw('novels.user_id = users.id');
@@ -33,37 +36,59 @@ class AuthorController extends Controller
       $sort = $request->sort;
 
       if ($sort == 'name_d') {
+        //ユーザー名降順
         $query->orderBy('name', 'desc');
       }
       if ($sort == 'id_a') {
+        //ユーザーID昇順
         $query->orderBy('id', 'asc');
       }
       if ($sort == 'id_d') {
+        //ユーザーID降順
         $query->orderBy('id', 'desc');
       }
       if ($sort == 'work_a') {
+        //投稿作品数昇順 -> ユーザー名昇順
         $query->withCount('novels')->orderBy('novels_count', 'asc')->orderBy('name', 'asc');
       }
       if ($sort == 'work_d') {
+        //投稿作品数降順 -> ユーザー名降順
         $query->withCount('novels')->orderBy('novels_count', 'desc')->orderBy('name', 'desc');
       }
       if ($sort == 'end_a') {
-        $query->withCount(['novels' => function($q) {
-          $q->where('end_check', '=', '1');
-        }])->orderBy('novels_count', 'asc')->orderBy('name', 'asc');
+        //完結済数昇順 -> 投稿作品数昇順 -> ユーザー名昇順
+        $query->withCount([
+          'novels',
+          'novels as ends_count' => function($q) {
+            $q->where('end_check', '=', '1');
+          }
+        ])->orderBy('ends_count', 'asc')
+          ->orderBy('novels_count', 'asc')
+          ->orderBy('name', 'asc');
+        // $query->withCount(['novels' => function($q) {
+        //   $q->where('end_check', '=', '1');
+        // }])->orderBy('novels_count', 'asc')->orderBy('name', 'asc');
       }
       if ($sort == 'end_d') {
-        $query->withCount(['novels' => function($q) {
-          $q->where('end_check', '=', '1');
-        }])->orderBy('novels_count', 'desc')->orderBy('name', 'desc');
+        //完結済数降順 -> 投稿作品数降順 -> ユーザー名降順
+        $query->withCount([
+          'novels',
+          'novels as ends_count' => function($q) {
+            $q->where('end_check', '=', '1');
+          }
+        ])->orderBy('ends_count', 'desc')
+          ->orderBy('novels_count', 'desc')
+          ->orderBy('name', 'desc');
       }
       if ($sort == 'updated_a') {
+        //最終更新日昇順
         $query->leftjoin('novels', 'users.id', '=', 'novels.user_id')
           ->select('users.id', 'name', DB::raw('max(novels.updated_at) as maxup'))
           ->groupBy('users.id')
           ->orderBy('maxup', 'asc');
       }
       if ($sort == 'updated_d') {
+        //最終更新日降順
         $query->leftjoin('novels', 'users.id', '=', 'novels.user_id')
           ->select('users.id', 'name', DB::raw('max(novels.updated_at) as maxup'))
           ->groupBy('users.id')

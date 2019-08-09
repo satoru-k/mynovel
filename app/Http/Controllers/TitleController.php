@@ -20,6 +20,7 @@ class TitleController extends Controller
       $query = Novel::query();
 
       if ($cond_title != '') {
+          //作品タイトルで検索
           $query->where('novel_title', 'LIKE', '%'.$cond_title.'%');
       }
       if ($cond_name != '') {
@@ -29,11 +30,15 @@ class TitleController extends Controller
           });
       }
       if ($cond_maincategory != '') {
+          //大ジャンルで絞り込み検索
           $query->where('novel_maincategory', $cond_maincategory);
       }
       if ($cond_subcategory != '') {
+          //小ジャンルで絞り込み検索
           $query->where('novel_subcategory', $cond_subcategory);
       }
+
+      //完結済作品の表示・非表示
       if ($cond_end == '1') {
           $query->where('end_check', '1');
       } elseif ($cond_end == '0') {
@@ -43,38 +48,50 @@ class TitleController extends Controller
       $sort = $request->sort;
 
       if ($sort == 'title_d') {
+        //タイトル降順
         $query->orderBy('novel_title', 'desc');
       }
       if ($sort == 'category_a') {
-        $query->orderBy('novel_maincategory', 'asc');
+        //大ジャンル昇順 -> 小ジャンル昇順 -> タイトル昇順
+        $query->orderBy('novel_maincategory', 'asc')->orderBy('novel_subcategory', 'asc')->orderBy('novel_title', 'asc');
       }
       if ($sort == 'category_d') {
-        $query->orderBy('novel_maincategory', 'desc');
+        //大ジャンル降順 -> 小ジャンル降順 -> タイトル降順
+        $query->orderBy('novel_maincategory', 'desc')->orderBy('novel_subcategory', 'desc')->orderBy('novel_title', 'desc');
       }
       if ($sort == 's-category_a') {
-        $query->orderBy('novel_subcategory', 'asc');
+        //小ジャンル昇順 -> タイトル昇順
+        $query->orderBy('novel_subcategory', 'asc')->orderBy('novel_title', 'asc');
       }
       if ($sort == 's-category_d') {
-        $query->orderBy('novel_subcategory', 'desc');
+        //小ジャンル降順 -> タイトル降順
+        $query->orderBy('novel_subcategory', 'desc')->orderBy('novel_title', 'desc');
       }
       if ($sort == 'wasuu_a') {
-        $query->withCount('stories')->orderBy('stories_count', 'asc');
+        //話数昇順 -> タイトル昇順
+        $query->withCount('stories')->orderBy('stories_count', 'asc')->orderBy('novel_title', 'asc');
       }
       if ($sort == 'wasuu_d') {
+        //話数降順 -> タイトル降順
         $query->withCount('stories')->orderBy('stories_count', 'desc')->orderBy('novel_title', 'desc');
       }
       if ($sort == 'updated_a') {
+        //最終更新日昇順
         $query->orderBy('updated_at', 'asc');
       }
       if ($sort == 'updated_d') {
+        //最終更新日降順
         $query->orderBy('updated_at', 'desc');
       }
       if ($sort == 'author_a') {
+        //作者昇順 -> タイトル昇順
         $query->with('users')
           ->join('users', 'novels.user_id', '=', 'users.id')
-          ->orderBy('users.name', 'asc');
+          ->orderBy('users.name', 'asc')
+          ->orderBy('novel_title', 'asc');
       }
       if ($sort == 'author_d') {
+        //作者降順 -> タイトル降順
         $query->with('users')
           ->join('users', 'novels.user_id', '=', 'users.id')
           ->orderBy('users.name', 'desc')
