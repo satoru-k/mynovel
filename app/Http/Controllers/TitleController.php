@@ -17,8 +17,7 @@ class TitleController extends Controller
       $cond_subcategory = $request->cond_subcategory;
       $cond_end = $request->cond_end;
 
-      $query = Novel::query();
-      $query->leftjoin('users', 'novels.user_id', '=', 'users.id')->select('users.id as uid', 'name', 'novels.id', 'novel_title', 'novel_maincategory', 'novel_subcategory', 'end_check', 'novels.updated_at')->groupBy('novels.id');
+      $query = Novel::leftjoin('users', 'novels.user_id', '=', 'users.id')->select('users.id as uid', 'name', 'novels.id', 'novel_title', 'novel_maincategory', 'novel_subcategory', 'end_check', 'novels.updated_at')->groupBy('novels.id');
 
       if ($cond_title != '') {
           //作品タイトルで検索
