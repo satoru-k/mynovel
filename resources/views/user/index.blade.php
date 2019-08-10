@@ -16,7 +16,7 @@
         @endif
       @endauth
     </div>
-    <h6 class="mt-1">投稿作品<span class="ml-3">全 {{ $posts->total() }} 作品</span></h6>
+    <h6 class="mt-2">投稿作品<span class="ml-3">全 {{ $posts->total() }} 作品</span></h6>
     <div class="row">
       <div class="list-news col-md-12 mx-auto">
         <div class="row" style="border:1px solid #999999;">
@@ -75,7 +75,7 @@
         </div>
       </div>
     </div>
-    <div class="pagination justify-content-end">
+    <div class="pagination justify-content-end mt-3">
       {{ $posts->links() }}
     </div>
     <h6 class="mt-2">ブックマーク<span class="ml-3">全 {{ $bookmarks->total() }} 作品</span></h6>
@@ -129,7 +129,7 @@
         </div>
       </div>
     </div>
-    <div class="pagination justify-content-end">
+    <div class="pagination justify-content-end mt-3">
       {{ $bookmarks->links() }}
     </div>
     <div class="row mt-3">
