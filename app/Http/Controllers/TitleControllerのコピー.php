@@ -18,7 +18,6 @@ class TitleController extends Controller
       $cond_end = $request->cond_end;
 
       $query = Novel::query();
-      $query->leftjoin('users', 'novels.user_id', '=', 'users.id')->select('users.id as uid', 'name', 'novels.id', 'novel_title', 'novel_maincategory', 'novel_subcategory', 'end_check', 'novels.updated_at')->groupBy('novels.id');
 
       if ($cond_title != '') {
           //作品タイトルで検索
@@ -86,11 +85,35 @@ class TitleController extends Controller
       }
       if ($sort == 'author_a') {
         //作者昇順 -> タイトル昇順
-        $query->orderBy('name', 'asc')->orderBy('novel_title', 'asc');
+        // $query->leftjoin('users', 'novels.user_id', '=', 'users.id')
+        //   ->select('users.name', 'novel_title')
+        //   ->groupBy('novels.user_id')
+        //   ->orderBy('novel_title', 'asc');
+
+        $query->with('user')
+          ->leftjoin('users', 'novels.user_id', '=', 'users.id')
+          ->select('users.id as uid', 'users.name', 'novels.id', 'novel_title', 'novel_maincategory', 'novel_subcategory', 'end_check', 'novels.updated_at')
+          ->groupBy('novels.id')
+          ->orderBy('users.name', 'asc')
+          ->orderBy('novel_title', 'asc');
+
+        // $query->with('users')
+        //   ->join('users', 'novels.user_id', '=', 'users.id')
+        //   ->select('users.id', 'users.name', 'novels.id', 'novel_title', 'novels.updated_at')
+        //   ->orderBy('users.name', 'asc')
+        //   ->orderBy('novel_title', 'asc');
+
+        // $query->with('users')
+        //   ->join('users', 'novels.user_id', '=', 'users.id')
+        //   ->orderBy('users.name', 'asc')
+        //   ->orderBy('novel_title', 'asc');
       }
       if ($sort == 'author_d') {
         //作者降順 -> タイトル降順
-        $query->orderBy('name', 'desc')->orderBy('novel_title', 'desc');
+        $query->with('users')
+          ->join('users', 'novels.user_id', '=', 'users.id')
+          ->orderBy('users.name', 'desc')
+          ->orderBy('novel_title', 'desc');
       }
 
       if ($sort == '') {

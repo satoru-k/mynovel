@@ -126,7 +126,7 @@
                   </td>
                   <td>{{ $p->updated_at->format('Y年m月d日') }}</td>
                   <td style="word-break:break-all;">
-                    <a href="{{ url('user/'.$p->user->id) }}">{{ $p->user->name }}</a>
+                    <a href="{{ url('user/'.$p->uid) }}">{{ $p->name }}</a>
                   </td>
                 </tr>
               @endforeach
