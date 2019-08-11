@@ -81,20 +81,22 @@ class AuthorController extends Controller
           ->orderBy('name', 'desc');
       }
       if ($sort == 'updated_a') {
-        //最終更新日昇順
+        //最終更新日昇順 -> ユーザー名昇順
         $query->leftjoin('novels', 'users.id', '=', 'novels.user_id')
           ->select('users.id', 'name', DB::raw('max(novels.updated_at) as maxup'))
           ->groupBy('users.id')
           ->orderByRaw('max(novels.updated_at) IS NULL ASC')
-          ->orderBy('maxup', 'asc');
+          ->orderBy('maxup', 'asc')
+          ->orderBy('name', 'asc');
       }
       if ($sort == 'updated_d') {
-        //最終更新日降順
+        //最終更新日降順 -> ユーザー名昇順
         $query->leftjoin('novels', 'users.id', '=', 'novels.user_id')
           ->select('users.id', 'name', DB::raw('max(novels.updated_at) as maxup'))
           ->groupBy('users.id')
           ->orderByRaw('max(novels.updated_at) IS NULL ASC')
-          ->orderBy('maxup', 'desc');
+          ->orderBy('maxup', 'desc')
+          ->orderBy('name', 'asc');
       }
 
       if ($sort == '') {

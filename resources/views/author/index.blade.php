@@ -81,7 +81,7 @@
       </div>
     </div>
     <div class="pagination justify-content-end mt-3">
-      {{ $posts->appends(['cond_name' => $cond_name, 'cond_work' => $cond_work])->links() }}
+      {{ $posts->appends(['cond_name' => $cond_name, 'cond_work' => $cond_work, 'sort' => $sort])->links() }}
     </div>
   </div>
 @endsection
