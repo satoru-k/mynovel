@@ -85,6 +85,7 @@ class AuthorController extends Controller
         $query->leftjoin('novels', 'users.id', '=', 'novels.user_id')
           ->select('users.id', 'name', DB::raw('max(novels.updated_at) as maxup'))
           ->groupBy('users.id')
+          ->orderByRaw('max(novels.updated_at) IS NULL ASC')
           ->orderBy('maxup', 'asc');
       }
       if ($sort == 'updated_d') {
@@ -92,6 +93,7 @@ class AuthorController extends Controller
         $query->leftjoin('novels', 'users.id', '=', 'novels.user_id')
           ->select('users.id', 'name', DB::raw('max(novels.updated_at) as maxup'))
           ->groupBy('users.id')
+          ->orderByRaw('max(novels.updated_at) IS NULL ASC')
           ->orderBy('maxup', 'desc');
       }
 
