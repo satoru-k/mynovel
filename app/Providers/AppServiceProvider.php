@@ -26,10 +26,9 @@ class AppServiceProvider extends ServiceProvider
       //本番環境(Heroku)でhttpsを強制する
       if (\App::environment('production')) {
           \URL::forceScheme('https');
+          //ページネーション時もhttpsを強制する
+          $this->app['request']->server->set('https', 'on');
       }
-
-      //ページネーション時もhttpsを強制する
-      $this->app['request']->server->set('HTTPS', 'on');
 
       //グローバル変数
       //管理者のID番号を1とする
