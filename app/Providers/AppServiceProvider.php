@@ -27,7 +27,10 @@ class AppServiceProvider extends ServiceProvider
       if (\App::environment('production')) {
           \URL::forceScheme('https');
       }
-      
+
+      //ページネーション時もhttpsを強制する
+      $this->app['request']->server->set('HTTPS', 'on');
+
       //グローバル変数
       //管理者のID番号を1とする
       //参照: https://stackoverflow.com/questions/28356193/
