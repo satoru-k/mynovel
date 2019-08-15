@@ -23,6 +23,10 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     {{-- 自作したCSSを読み込む --}}
     <link href="{{ asset('css/admin.css') }}" rel="stylesheet">
+
+    <!-- favicon -->
+    <link rel="icon" type="image/x-icon" href="{{ asset('images/favicon.ico') }}">
+
   </head>
   <body>
     <div id="app">

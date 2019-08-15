@@ -177,7 +177,7 @@
             @if ($profile->website != null)
               <tr>
                 <td>WEBサイト</td>
-                <td><a href="{{ $profile->website }}">{{ $profile->website }}</a></td>
+                <td><a href="{{ $profile->website }}" target="_blank">{{ $profile->website }}</a></td>
               </tr>
             @endif
             @if ($profile->introduction != null)
