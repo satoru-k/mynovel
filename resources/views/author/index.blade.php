@@ -64,7 +64,7 @@
             <tbody>
               @foreach($posts as $p)
                 <tr>
-                  <th>{{ $p->id }}</th>
+                  <td>{{ $p->id }}</td>
                   <td><a href="{{ url('user/'.$p->id) }}">{{ str_limit($p->name, 50) }}</a></td>
                   <td>全 {{ $p->novels()->count() }} 作品</td>
                   <td>{{ $p->novels()->count('end_check', '1') }} 作品</td>

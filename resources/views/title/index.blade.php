@@ -15,10 +15,10 @@
               <option value="s2">作者</option>
             </select>
             <div id="s1" name="search_type" class="col-md-10">
-                <input type="text" class="form-control" name="cond_title" value="{{ $cond_title }}" placeholder="作品タイトルを入力してください">
+              <input type="text" class="form-control" name="cond_title" value="{{ $cond_title }}" placeholder="作品タイトルを入力してください">
             </div>
             <div id="s2" name="search_type" class="col-md-10" style="display:none;">
-                <input type="text" class="form-control" name="cond_name" value="{{ $cond_name }}" placeholder="作者名を入力してください">
+              <input type="text" class="form-control" name="cond_name" value="{{ $cond_name }}" placeholder="作者名を入力してください">
             </div>
             <div class="col-md-5 mt-2">
               <select class="parent form-control" name="cond_maincategory" value="">
