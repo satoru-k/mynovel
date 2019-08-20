@@ -117,7 +117,7 @@
             <tbody>
               @foreach($posts as $p)
                 <tr>
-                  <td style="word-break:break-all;"><a href="{{ url('novel/'.$p->id) }}">{{ $p->novel_title }}</a></td>
+                  <td class="title" style="word-break:break-all;"><a href="{{ url('novel/'.$p->id) }}">{{ $p->novel_title }}</a></td>
                   <td>{{ $p->novel_subcategory." [".$p->novel_maincategory."]" }}</td>
                   <td>全 {{ $p->stories()->count('sort_num') }} 話
                     @if ($p->end_check == 1)
@@ -125,7 +125,7 @@
                     @endif
                   </td>
                   <td>{{ $p->updated_at->format('Y年m月d日') }}</td>
-                  <td style="word-break:break-all;">
+                  <td class="author" style="word-break:break-all;">
                     <a href="{{ url('user/'.$p->uid) }}">{{ $p->name }}</a>
                   </td>
                 </tr>

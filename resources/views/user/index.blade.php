@@ -45,7 +45,7 @@
               @else
               @foreach($posts as $p)
                 <tr>
-                  <td style="word-break:break-all;"><a href="{{ url('novel/'.$p->id) }}">{{ str_limit($p->novel_title, 510) }}</a></td>
+                  <td class="title" style="word-break:break-all;"><a href="{{ url('novel/'.$p->id) }}">{{ str_limit($p->novel_title, 510) }}</a></td>
                   <td>{{ $p->novel_subcategory." [".$p->novel_maincategory."]" }}</td>
                   @if ($p->stories()->max('sort_num') != null)
                     <td>全 {{ $p->stories()->max('sort_num') }} 話@if ($p->end_check == 1)<br><span class="fin">(完結済)</span>@endif</td>
@@ -107,7 +107,7 @@
               @else
               @foreach($bookmarks as $b)
                 <tr>
-                  <td style="word-break:break-all;"><a href="{{ url('novel/'.$b->novel->id) }}">{{ $b->novel->novel_title }}</a><span class="ml-2">(<a href="{{ url('user/'.$b->novel->user_id) }}">{{ $b->novel->user->name }}</a>)</span></td>
+                  <td class="title author" style="word-break:break-all;"><a href="{{ url('novel/'.$b->novel->id) }}">{{ $b->novel->novel_title }}</a><span class="ml-2">(<a href="{{ url('user/'.$b->novel->user_id) }}">{{ $b->novel->user->name }}</a>)</span></td>
                   <td>{{ $b->novel->novel_subcategory." [".$b->novel->novel_maincategory."]" }}</td>
                   @if ($b->novel->stories()->max('sort_num') != null)
                     <td>全 {{ $b->novel->stories()->max('sort_num') }} 話@if ($b->novel->end_check == 1)<br><span class="fin">(完結済)</span>@endif</td>
@@ -175,7 +175,7 @@
               </tr>
             @endif
             @if ($profile->website != null)
-              <tr>
+              <tr class="mysite">
                 <td>WEBサイト</td>
                 <td><a href="{{ $profile->website }}" target="_blank">{{ $profile->website }}</a></td>
               </tr>

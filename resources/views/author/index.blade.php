@@ -65,7 +65,7 @@
               @foreach($posts as $p)
                 <tr>
                   <td>{{ $p->id }}</td>
-                  <td><a href="{{ url('user/'.$p->id) }}">{{ str_limit($p->name, 50) }}</a></td>
+                  <td class="author"><a href="{{ url('user/'.$p->id) }}">{{ str_limit($p->name, 50) }}</a></td>
                   <td>全 {{ $p->novels()->count() }} 作品</td>
                   <td>{{ $p->novels()->count('end_check', '1') }} 作品</td>
                   @if ($p->novels()->count('updated_at') > 0)

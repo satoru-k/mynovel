@@ -34,7 +34,7 @@
     <div class="row">
       <div class="col-md-8 mx-auto my-3">
         <div class="text-right">
-          <p>作者：<a href="{{ url('user/'.$id) }}">{{ str_limit($name, 50) }}</a></p>
+          <p class="author">作者：<a href="{{ url('user/'.$id) }}">{{ str_limit($name, 50) }}</a></p>
         </div>
       </div>
     </div>
@@ -65,7 +65,7 @@
                   </tr>
                 @endif
                 <tr>
-                  <td style="width:200px; word-break: break-all;"><a href="{{ url('novel/'.$novel_id.'/story/'.$p->sort_num) }}">{{ $p->story_title }}</a>@if ($bookmark->story_num == $p->sort_num)<span class="marking ml-2">§</span>@endif</td>
+                  <td class="story" style="width:200px; word-break: break-all;"><a href="{{ url('novel/'.$novel_id.'/story/'.$p->sort_num) }}">{{ $p->story_title }}</a>@if ($bookmark->story_num == $p->sort_num)<span class="marking ml-2">§</span>@endif</td>
                   <td style="width:60px;">{{ $p->updated_at->format('Y/m/d H:i') }}</td>
                   @auth
                     @if (($p->user_id) === (Auth::user()->id))

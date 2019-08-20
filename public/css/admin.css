@@ -93,3 +93,11 @@ body {
   color: #f3f3f3;
 }
 
+.loginlink a:visited,
+.mysite a:visited,
+.title a:visited,
+.author a:visited,
+.story a:visited {
+  color: #660099;
+}
+

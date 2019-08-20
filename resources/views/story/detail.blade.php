@@ -10,7 +10,7 @@
       <a class="scroll-button" href="#bottom">↓Go to Bottom</a>
     </div>
     <div class="row">
-      <div class="col-md-8 mx-auto">
+      <div class="title author col-md-8 mx-auto">
         <a href="{{ url('novel/'.$n->id) }}" class="mr-4" style="word-wrap:break-word;">{{ $n->novel_title }}</a>
         作者：<a href="{{ url('user/'.$n->user_id) }}">{{ $n->user->name }}</a>
         @if ($posts->chapter != null)
@@ -37,7 +37,7 @@
       </div>
     </div>
     <div class="row mb-1">
-      <div class="col-md-6 mx-auto text-center">
+      <div class="story col-md-6 mx-auto text-center">
         @if ($posts->sort_num != 1)
         <a rel="prev" href="{{$posts->sort_num-1}}" class="mr-3"><<&nbsp;前へ</a>
         @endif
@@ -65,7 +65,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-6 mx-auto text-center">
+      <div class="story col-md-6 mx-auto text-center">
         @if ($posts->sort_num != 1)
         <a rel="prev" href="{{$posts->sort_num-1}}" class="mr-3"><<&nbsp;前へ</a>
         @endif
